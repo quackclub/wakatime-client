@@ -19,9 +19,7 @@ class WakaTimeClient {
     this.apiKey = apiKey;
     this.axiosConfiguration = axios.create({
       baseURL,
-      // Base-64 encode the API Key
-      // https://wakatime.com/developers#introduction
-      headers: { Authorization: `Basic ${Buffer.from(this.apiKey).toString('base64')}` },
+      headers: baseURL.includes("hackatime") ? { Authorization: `Bearer ${Buffer.from(this.apiKey).toString()}` } : { Authorization: `Basic ${Buffer.from(this.apiKey).toString('base64')}` },
     });
   }
 
